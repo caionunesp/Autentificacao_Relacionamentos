@@ -17,7 +17,6 @@ Route::resource('musicas', MusicaController::class);
 
 // --- ROTAS DO SISTEMA DE POSTS (Plano de Aula: O Crachá e a Chave) ---
 // Estado Inicial: Vulnerável (Sem middleware 'auth' ativo). Visitantes podem acessar e manipular posts.
-Route::resource('posts', PostController::class);
 
 // SPRINT 1: Para proteger todas as rotas do CRUD de posts, os alunos devem comentar a linha acima 
 // e descomentar a linha abaixo (ativando o middleware 'auth'):
@@ -31,6 +30,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    Route::resource('posts', PostController::class);
 });
 
 require __DIR__.'/auth.php';
