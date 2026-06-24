@@ -30,6 +30,9 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('albuns');
+        Schema::table('albuns', function (Blueprint $table) {
+            $table->dropForeign(['artista_id']);
+            $table->dropColumn('artista_id');
+        });
     }
 };
