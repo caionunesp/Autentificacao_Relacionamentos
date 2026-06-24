@@ -24,8 +24,8 @@ class AlbumController extends Controller
      */
     public function create()
     {
-        // Retorna a view onde está o formulário de cadastro
-        return view('albuns.create');
+        $artistas = \App\Models\Artista::all();
+        return view('albuns.create', compact('artistas'));
     }
 
     /**
@@ -38,6 +38,7 @@ class AlbumController extends Controller
             'titulo' => 'required|string|max:255',
             'ano' => 'required|integer|min:1900|max:' . (date('Y') + 1),
             'capa_url' => 'nullable|url', // A URL da imagem é opcional
+            'artista_id' => 'required|exists:artistas,id'
         ]);
 
         // Eloquent: Salva o novo álbum no banco usando o Mass Assignment (configurado via $fillable)

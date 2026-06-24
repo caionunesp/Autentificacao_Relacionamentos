@@ -17,6 +17,7 @@ class Album extends Model
         'titulo',
         'ano',
         'capa_url',
+        'artista_id',
     ];
 
     /**
@@ -30,5 +31,9 @@ class Album extends Model
         // hasMany indica que este Model (Album) possui muitas instâncias do Model Musica.
         // O Laravel assume por padrão a chave estrangeira 'album_id' no Model Musica.
         return $this->hasMany(Musica::class);
+    }
+    public function artista()
+    {
+        return $this->belongsTo(Artista::class, 'artista_id');
     }
 }

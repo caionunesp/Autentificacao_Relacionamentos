@@ -419,6 +419,9 @@
             <nav class="nav-links">
                 <a href="{{ route('albuns.index') }}" class="{{ Request::is('albuns*') ? 'active' : '' }}">Álbuns</a>
                 <a href="{{ route('musicas.create') }}" class="{{ Request::is('musicas/create') ? 'active' : '' }}">Nova Música</a>
+                @auth
+                    <a href="{{ route('artistas.create') }}" class="{{ Request::is('artistas/create') ? 'active' : '' }}">Novo Artista</a>
+                @endauth
                 <a href="{{ route('posts.index') }}" class="{{ Request::is('posts*') ? 'active' : '' }}">Mural</a>
                 
                 <span style="color: var(--border-color); display: flex; align-items: center;">|</span>

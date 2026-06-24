@@ -11,6 +11,7 @@ class Post extends Model
 
     // Define explicitamente o nome da tabela no banco de dados (plural correto em português)
     protected $table = 'posts';
+    
 
     // Campos que podem ser preenchidos em massa (Mass Assignment)
     protected $fillable = [
@@ -18,9 +19,13 @@ class Post extends Model
         'conteudo',
     ];
 
-
     public function user()
     {
         return $this->belongsTo(User::class, 'user_id');
     }
+
+   public function comentarios()
+    {
+        return $this->hasMany(Comment::class);
+    }  
 }

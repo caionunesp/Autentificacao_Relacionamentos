@@ -15,9 +15,11 @@ class PostController extends Controller
     public function index()
     {
         // Eloquent: Busca todas as músicas carregando os dados do álbum correspondente (belongsTo)
-        $posts = Post::with('user')->get();
+        $posts = Post::with(['user', 'comentarios.user'])->latest()->get();
 
+        // Envia a variável $posts para a sua view index.blade.php
         return view('posts.index', compact('posts'));
+        
     }
 
     /**
@@ -40,10 +42,15 @@ class PostController extends Controller
             'conteudo' => $request->conteudo,
         ]);
 
+        
         // 3. Redireciona para a listagem com uma mensagem de sucesso
         return redirect()->route('posts.index')->with('success', 'Post criado com sucesso!');
     }
 
+    public function create()
+    {
+        return view('posts.create');
+    }
  
     public function edit(Post $post)
     {

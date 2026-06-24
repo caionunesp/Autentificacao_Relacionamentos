@@ -5,6 +5,8 @@ use App\Http\Controllers\MusicaController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\CommentController;
+use App\Http\Controllers\ArtistaController;
 
 // Redireciona a página raiz para a listagem de álbuns
 Route::get('/', function () {
@@ -33,4 +35,12 @@ Route::middleware('auth')->group(function () {
     Route::resource('posts', PostController::class);
 });
 
+Route::middleware(['auth'])->group(function () {
+    Route::get('/posts/create', [PostController::class, 'create'])->name('posts.create');
+    Route::post('/posts', [PostController::class, 'store'])->name('posts.store');
+    Route::post('/posts/{post}/comments', [CommentController::class, 'store'])->name('comments.store');
+    Route::delete('/comments/{comment}', [CommentController::class, 'destroy'])->name('comments.destroy');
+    Route::get('/artistas/create', [ArtistaController::class, 'create'])->name('artistas.create');
+    Route::post('/artistas', [ArtistaController::class, 'store'])->name('artistas.store');
+});
 require __DIR__.'/auth.php';
